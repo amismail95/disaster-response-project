@@ -4,11 +4,11 @@ from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
     """Load the necessary data files.
-    
+
     Args:
     messages_filepath: file path for the messages data.
     categories_filepath: file path for the categories data.
-    
+
     Returns:
     df: merged dataframe of messages and categories.
     """
@@ -21,10 +21,10 @@ def load_data(messages_filepath, categories_filepath):
 
 def clean_data(df):
     """Clean the data.
-    
+
     Args:
     df: merged dataframe of messages and categories.
-    
+
     Returns:
     df: cleaned dataframe of messages and categories.
     """
@@ -43,15 +43,15 @@ def clean_data(df):
 
 def save_data(df, database_filename):
     """Saves the data.
-    
+
     Args:
     df: cleaned merged dataframe of messages and categories.
     database_filename: desired name for the file in the database.
-    
-    
+
+    Returns: None
     """
     engine = create_engine('sqlite:///' + database_filename)
-    df.to_sql('ProjectTableIsmail', engine, index=False)  
+    df.to_sql('ProjectTableIsmail', engine, index=False)
 
 
 def main():
@@ -65,12 +65,12 @@ def main():
 
         print('Cleaning data...')
         df = clean_data(df)
-        
+
         print('Saving data...\n    DATABASE: {}'.format(database_filepath))
         save_data(df, database_filepath)
-        
+
         print('Cleaned data saved to database!')
-    
+
     else:
         print('Please provide the filepaths of the messages and categories '\
               'datasets as the first and second argument respectively, as '\
